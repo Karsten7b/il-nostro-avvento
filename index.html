@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Il nostro Avvento</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf5ec;--card:#fffaf3;--pink:#e9b8b8;--pink2:#f6dedb;--red:#a8203a;--gold:#c2993f;--ink:#4a2a2f;--soft:#8a6a6e;--sh:rgba(120,40,50,.18);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1519;--card:#3a1d23;--pink2:#4d2830;--ink:#f7e8df;--soft:#c9a9a6;--sh:rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#2a1519;--card:#3a1d23;--pink2:#4d2830;--ink:#f7e8df;--soft:#c9a9a6;--sh:rgba(0,0,0,.4)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Jost,system-ui,sans-serif;overflow-x:hidden;
+background-image:radial-gradient(circle at 20% 0,var(--pink2),transparent 45%),radial-gradient(circle at 90% 30%,var(--pink2),transparent 40%)}
+h1,h2,h3,.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;margin:0}
+main{max-width:760px;margin:0 auto;padding:0 16px 60px;position:relative;z-index:2}
+.snow{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.snow i{position:absolute;top:-20px;color:var(--gold);opacity:.55;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(105vh) rotate(260deg)}}
+header{text-align:center;padding:48px 0 24px}
+.eyebrow{letter-spacing:.3em;font-size:12px;color:var(--gold);text-transform:uppercase}
+h1{font-size:clamp(40px,11vw,68px);color:var(--red);line-height:1.05;margin:10px 0}
+.lead{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:22px;color:var(--soft);max-width:480px;margin:0 auto}
+.count{display:flex;justify-content:center;gap:10px;margin:26px 0 6px}
+.count div{background:var(--card);border:1px solid var(--gold);border-radius:14px;padding:8px 12px;min-width:66px;box-shadow:0 6px 18px var(--sh)}
+.count b{display:block;font:600 28px "Cormorant Garamond",Georgia,serif;color:var(--red)}
+.count span{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--soft)}
+.how{background:var(--card);border-radius:18px;padding:16px 18px;margin:22px 0;border:1px dashed var(--gold);font-size:15px;color:var(--soft);text-align:center}
+.stats{display:flex;justify-content:center;gap:18px;margin:14px 0 18px;font-size:14px;color:var(--soft)}
+.stats b{color:var(--red);font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+@media(min-width:560px){.grid{grid-template-columns:repeat(6,1fr);gap:12px}}
+.cell{position:relative;aspect-ratio:1;border:1.5px solid var(--gold);border-radius:14px;cursor:pointer;padding:0;overflow:hidden;color:var(--ink);
+background:linear-gradient(145deg,var(--card),var(--pink2));box-shadow:0 4px 12px var(--sh);transition:transform .25s}
+.cell:active{transform:scale(.94)}
+.cell .n{font:600 clamp(24px,7vw,34px) "Cormorant Garamond",Georgia,serif;color:var(--red);display:flex;height:100%;align-items:center;justify-content:center}
+.cell .ic{position:absolute;right:6px;bottom:4px;font-size:13px}
+.cell.open{background-size:cover;background-position:center;border-color:var(--red)}
+.cell.open.nophoto{background:linear-gradient(145deg,var(--red),#d4586c)}
+.cell.open .n{position:absolute;left:6px;top:4px;height:auto;font-size:17px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.6);display:block}
+.cell.open .ic{background:var(--red);color:#fff;border-radius:50%;width:20px;height:20px;display:grid;place-items:center;font-size:11px}
+.cell.pop{animation:pop .8s}
+@keyframes pop{40%{transform:scale(1.15) rotate(-3deg);box-shadow:0 0 28px var(--gold)}}
+section{margin-top:44px;text-align:center}
+section h2{font-size:34px;color:var(--red)}
+.sub{color:var(--soft);font-size:14px;margin:4px 0 16px}
+.tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}
+.tile{width:40px;height:48px;border-radius:9px;border:1.5px solid var(--gold);display:grid;place-items:center;background:var(--card);font:600 24px "Cormorant Garamond",Georgia,serif;color:var(--red);position:relative}
+.tile small{position:absolute;top:1px;left:4px;font:400 9px Jost,sans-serif;color:var(--soft)}
+.tile.empty{border-style:dashed;background:transparent;opacity:.55}
+.tile.new{animation:pop .9s}
+.words{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:14px}
+.word{display:flex;gap:5px}
+.word .tile{opacity:0;animation:in .6s forwards}
+@keyframes in{from{opacity:0;transform:translateY(-30px) rotate(-12deg)}to{opacity:1;transform:none}}
+.btn{font:500 16px Jost,sans-serif;background:var(--red);color:#fff;border:0;border-radius:999px;padding:13px 26px;cursor:pointer;box-shadow:0 6px 18px var(--sh);margin-top:16px}
+.btn.ghost{background:transparent;color:var(--red);border:1.5px solid var(--red);box-shadow:none}
+.btn[disabled]{opacity:.45;cursor:default}
+.xmas{margin-top:26px;width:100%;border-radius:16px;border:1.5px solid var(--gold);padding:18px;cursor:pointer;font:600 24px "Cormorant Garamond",Georgia,serif;color:var(--ink);background:linear-gradient(135deg,var(--card),var(--pink2),var(--card))}
+.xmas small{display:block;font:400 13px Jost,sans-serif;color:var(--soft)}
+.polas{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px;margin-top:10px}
+.pola{background:#fff;color:#4a2a2f;padding:10px 10px 14px;border-radius:4px;box-shadow:0 8px 20px var(--sh);transform:rotate(var(--r));text-align:left}
+.pola:nth-child(odd){--r:-2.5deg}.pola:nth-child(even){--r:2deg}
+.pola .ph{aspect-ratio:1;background:linear-gradient(145deg,var(--pink),var(--pink2)) center/cover;border-radius:2px;cursor:zoom-in}
+.pola b{display:block;font:600 20px "Cormorant Garamond",Georgia,serif;margin-top:8px}
+.pola span{font-size:12px;color:#9a7a7e}
+.pola p{font-size:13px;margin:4px 0 0;line-height:1.4}
+footer{text-align:center;margin-top:50px;font-size:13px;color:var(--soft)}
+footer button{background:none;border:0;color:var(--red);text-decoration:underline;font:inherit;cursor:pointer}
+.ov{position:fixed;inset:0;z-index:20;background:rgba(40,10,18,.62);backdrop-filter:blur(4px);display:none;overflow-y:auto;padding:max(16px,env(safe-area-inset-top,0px)) 14px max(16px,env(safe-area-inset-bottom,0px))}
+.ov.on{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0}}
+.box{max-width:520px;margin:20px auto;background:var(--card);border-radius:22px;padding:26px 22px;border:1px solid var(--gold);text-align:center;position:relative}
+.x{position:absolute;right:12px;top:10px;background:none;border:0;font-size:26px;color:var(--soft);cursor:pointer}
+.box h2{font-size:32px;color:var(--red)}
+input,textarea{width:100%;font:500 18px Jost,sans-serif;text-align:center;padding:12px;border-radius:12px;border:1.5px solid var(--pink);background:var(--bg);color:var(--ink);margin-top:14px;letter-spacing:.1em;text-transform:uppercase}
+textarea{text-transform:none;letter-spacing:0;font-size:13px;height:90px}
+.err{color:var(--red);min-height:24px;font-size:14px;margin-top:8px}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.photo{width:100%;aspect-ratio:4/3;border-radius:12px;margin:16px 0;background:linear-gradient(145deg,var(--pink),var(--pink2)) center/cover;border:6px solid #fff;box-shadow:0 8px 22px var(--sh);cursor:zoom-in}
+.paper{background:repeating-linear-gradient(transparent 0 27px,rgba(194,153,63,.25) 27px 28px),#fffdf6;color:#4a2a2f;border-radius:6px;padding:18px 18px 8px;text-align:left;font:500 20px/28px "Cormorant Garamond",Georgia,serif;white-space:pre-line;box-shadow:0 6px 16px var(--sh);margin:14px 0}
+.env{margin:22px auto 6px;width:210px;cursor:pointer;position:relative;height:140px}
+.env .body{position:absolute;inset:40px 0 0;background:var(--pink);border-radius:6px;z-index:3;box-shadow:0 6px 16px var(--sh);display:grid;place-items:center;font-size:30px;color:var(--red)}
+.env .flap{position:absolute;left:0;right:0;top:40px;height:60px;background:#dba1a6;clip-path:polygon(0 0,100% 0,50% 100%);z-index:4;transform-origin:top;transition:transform .6s}
+.env .let{position:absolute;left:12px;right:12px;top:48px;height:84px;background:#fffdf6;border-radius:4px;z-index:2;display:grid;place-items:center;font:600 60px "Cormorant Garamond",Georgia,serif;color:var(--red);transition:transform .7s .3s}
+.env.o .flap{transform:rotateX(180deg);z-index:1}
+.env.o .let{transform:translateY(-62px);z-index:5}
+.keep{font-style:italic;color:var(--soft);font-size:14px;opacity:0;transition:opacity .6s 1s;margin-top:44px}
+.env.o~.keep{opacity:1}
+.lb{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.88);display:none;place-items:center;padding:16px}
+.lb.on{display:grid}.lb img{max-width:100%;max-height:92vh;border-radius:6px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,40px);background:var(--red);color:#fff;padding:12px 22px;border-radius:999px;opacity:0;transition:.4s;z-index:50}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.word .tile{opacity:1}}
+</style>
+</head>
+<body>
+<div class="snow" id="snow" aria-hidden="true"></div>
+<main>
+<header>
+ <div class="eyebrow">Calendario dell’Avvento</div>
+ <h1 id="nome"></h1>
+ <p class="lead" id="frase"></p>
+ <div class="count" id="count"></div>
+ <div class="sub" id="cdlabel"></div>
+</header>
+<div class="how">Ogni giorno trovi nella busta un biglietto con un <b>codice segreto</b>, una lettera scritta per te e una <b>lettera dell’alfabeto</b>. Tocca la casella del giorno, inserisci il codice e scopri la sorpresa.</div>
+<div class="stats"><div><b id="sAperte">0</b> / 24 giorni aperti</div><div><b id="sLettere">0</b> / 25 lettere</div></div>
+<div class="grid" id="grid"></div>
+<button class="xmas" id="xmas"></button>
+
+<section id="segreto">
+ <h2>Il nostro messaggio segreto ♥</h2>
+ <p class="sub">Ogni giorno una lettera. Alla fine, rimettile in ordine.</p>
+ <div class="tiles" id="tiles"></div>
+ <div class="words" id="words"></div>
+ <button class="btn" id="reveal" hidden>Scopri il nostro messaggio ♥</button>
+</section>
+
+<section id="ricordi" hidden>
+ <h2>I nostri ricordi</h2>
+ <p class="sub">Un piccolo album della nostra storia</p>
+ <div class="polas" id="polas"></div>
+</section>
+
+<footer>
+ I progressi sono salvati su questo dispositivo.<br>
+ Cambi telefono? <button id="exp">Esporta o importa i progressi</button>
+</footer>
+</main>
+
+<div class="ov" id="ov"><div class="box" id="box"></div></div>
+<div class="lb" id="lb"><img alt=""></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ MODIFICA QUI ============ */
+const CONFIG={
+  nome:"Lety",
+  frase:"24 giorni, 24 sorprese, infinite ragioni per amarti, bimba mia.",
+  natale:"2026-12-25T00:00:00",
+  segreto:"SEI LA RAGIONE DEL MIO SORRISO", /* 25 lettere: 24 nei giorni + l’ultima il 25 dicembre */
+  mostraRicordi:true
+};
+/* foto: scrivi un indirizzo immagine (es. "foto/1.jpg") oppure lascia "" */
+/* Una riga per giorno. La dedica va tra apici inversi ` ` e può andare a capo. */
+const GIORNI=[
+ {titolo:"Inizio Dolce",dedica:`Si, forse troppe caramelle, ma che ci vuoi fare?.`,foto:"foto/1.jpg",codice:"4821"},
+ {titolo:"Un Regalino",dedica:`Era luccicante, perche no?.`,foto:"foto/2.jpg",codice:"7305"},
+ {titolo:"Chiedimelo Prima",dedica:`Mettili dove vuoi, con il permesso.`,foto:"foto/3.jpg",codice:"1964"},
+ {titolo:"Bellino e peloso",dedica:`Uno tra i tanti portachiavi, troverai dove appenderlo!.`,foto:"foto/4.jpg",codice:"5278"},
+ {titolo:"Portafortuna",dedica:`Un po di cambio, porteranno fortuna al telefono?.`,foto:"foto/5.jpg",codice:"3640"},
+ {titolo:"Altro Kinder Day?",dedica:`Dai, Kinder non ne avevo ancora messi!.`,foto:"foto/6.jpg",codice:"9157"},
+ {titolo:"Basta Girare Il Manubrio!",dedica:`Cercavo quello con i Led, ma la Cina mi odia, ma questo è FIGHISSIMO!.`,foto:"foto/7.jpg",codice:"2083"},
+ {titolo:"Appendila!",dedica:`La appendiamo da me o da te?.`,foto:"foto/8.jpg",codice:"6419"},
+ {titolo:"Serata Benessere?",dedica:`Voglio la foto con questi!.`,foto:"foto/9.jpg",codice:"8736"},
+ {titolo:"Usarla o No?",dedica:`Bella e profumata, meglio usarla o no?.`,foto:"foto/10.jpg",codice:"1502"},
+ {titolo:"Lo Porto Io",dedica:`Forse è grande, ma tanto lo porto io, quindi...`,foto:"foto/11.jpg",codice:"4097"},
+ {titolo:"Maschera?",dedica:`Non so quale prendere, la prendiamo insieme poi!.`,foto:"foto/12.jpg",codice:"7864"},
+ {titolo:"Dedicata A Te!",dedica:`Un altro portachiavi, ma sono troppo belli!.`,foto:"foto/13.jpg",codice:"3326"},
+ {titolo:"Li Useremo?",dedica:`Usiamoli, voglio la foto, perfavore!.`,foto:"foto/14.jpg",codice:"9581"},
+ {titolo:"Era Bella!",dedica:`Abbinata al braccialetto e all anello!.`,foto:"foto/15.jpg",codice:"2749"},
+ {titolo:"Un Ricordo",dedica:`Qualcosa che ti ricordi Noel o Kiwi!.`,foto:"foto/16.jpg",codice:"6130"},
+ {titolo:"Non Dimenticarle!",dedica:`Non dimenticarle in giro per casa mia eh!.`,foto:"foto/17.jpg",codice:"8472"},
+ {titolo:"Noi<3",dedica:`Un po di nostri ricordi!.`,foto:"foto/18.jpg",codice:"1895"},
+ {titolo:"Una Serie Di Ricordi",dedica:`E qui, puoi mettere tutte le nostre foto stampate!.`,foto:"foto/19.jpg",codice:"5603"},
+ {titolo:"Portali Ovunque!",dedica:`Puoi ora lasciarli anche a casa mia!.`,foto:"foto/20.jpg",codice:"7218"},
+ {titolo:"Serata Film?",dedica:`Prometto di non dormire, giuro!.`,foto:"foto/21.jpg",codice:"3951"},
+ {titolo:"Te Lo Ricordi?",dedica:`Sicuramente no, ma è simile ed è bello!.`,foto:"foto/22.jpg",codice:"9046"},
+ {titolo:"Scatola Dei Ricordi",dedica:`UN po di noi, in miniatura!.`,foto:"foto/23.jpg",codice:"2567"},
+ {titolo:"Ora Ne Hai 2!",dedica:`Puoi darti il cambio o metterli insieme!.`,foto:"foto/24.jpg",codice:"6384"}
+];
+const FINALE={
+  titolo:"Buon Natale, bimba mia!",
+  lettera:"Bimba mia, è il primo natale insieme, in questi mesi, che oggi sono esattamente +4, mi hai dato piu di cio che potevo chiedere, sono stati mesi lunghi e corti,  il tempo è volato e nemmeno me ne sono reso contro, sei tutto cio che potevo desiderare, sei la mia vita e senza te non potrei vivere, scusami sempre per tutto, sappi che se mi incazzo o rimango male, e solo perche ci tengo a te e ho paura di perderti, ti amo tantissimo!!!.",
+  foto:"foto/25.jpg"
+};
+const RICORDI=[
+  {titolo:"Il nostro primo ricordo",data:"12/07/2026",testo:"La prima foto scattata.",foto:"foto/26.jpg"},
+  {titolo:"Un giorno speciale",data:"22/09/2026",testo:"Speciale piu per te.",foto:"foto/27.jpg"},
+  {titolo:"Un’avventura insieme",data:"13/08/2026",testo:"Il primo viaggio.",foto:"foto/28.jpg"}
+];
+/* ====================================== */
+
+const $=id=>document.getElementById(id);
+const KEY="avvento-v1";
+const FR=CONFIG.segreto.replace(/[^A-Za-zÀ-ÿ]/g,"").toUpperCase();
+const posOf=i=>(i*7)%25;           /* posizione della lettera del giorno nella frase */
+const letOf=i=>FR[posOf(i)]||"?";
+let S={open:[],reveal:false,fin:false};
+try{const r=JSON.parse(localStorage.getItem(KEY));if(r&&Array.isArray(r.open))S=r}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const isOpen=i=>i===24?!!S.fin:S.open.includes(i);
+const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),2400)};
+const bg=u=>u?`url('${u}')`:"";
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+$("nome").textContent=CONFIG.nome;$("frase").textContent=CONFIG.frase;
+if(CONFIG.mostraRicordi)$("ricordi").hidden=false;
+
+/* neve */
+if(!reduce){const s=$("snow");for(let i=0;i<22;i++){const e=document.createElement("i");e.textContent=i%4?"❄":"✦";e.style.left=Math.random()*100+"%";e.style.fontSize=8+Math.random()*12+"px";e.style.animationDuration=9+Math.random()*10+"s";e.style.animationDelay=-Math.random()*15+"s";s.appendChild(e)}}
+
+/* conto alla rovescia */
+function tick(){
+  const d=new Date(CONFIG.natale)-new Date();
+  if(d<=0){$("count").innerHTML="";$("cdlabel").textContent="Buon Natale ♥";return}
+  const g=Math.floor(d/864e5),h=Math.floor(d/36e5)%24,m=Math.floor(d/6e4)%60;
+  $("count").innerHTML=[[g,"giorni"],[h,"ore"],[m,"minuti"]].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join("");
+  $("cdlabel").textContent="al Natale";
+}
+tick();setInterval(tick,30000);
+
+/* griglia */
+function renderGrid(popIdx){
+  const g=$("grid");g.innerHTML="";
+  GIORNI.forEach((G,i)=>{
+    const b=document.createElement("button");const o=isOpen(i);
+    b.className="cell"+(o?" open":"")+(o&&!G.foto?" nophoto":"")+(i===popIdx?" pop":"");
+    b.setAttribute("aria-label","Giorno "+(i+1)+(o?", aperto":", bloccato"));
+    if(o&&G.foto)b.style.backgroundImage=bg(G.foto);
+    b.innerHTML=`<span class="n">${i+1}</span><span class="ic">${o?"♥":"🔒"}</span>`;
+    b.onclick=()=>o?showDay(i):askCode(i);
+    g.appendChild(b);
+  });
+  $("sAperte").textContent=S.open.length;$("sLettere").textContent=S.open.length+(S.fin?1:0);
+}
+
+/* messaggio segreto */
+function renderSecret(newIdx){
+  const t=$("tiles");t.innerHTML="";
+  const all=S.open.length===24&&S.fin;
+  if(!S.reveal||!all){
+    for(let i=0;i<25;i++){
+      const e=document.createElement("div");
+      if(isOpen(i)){e.className="tile"+(i===newIdx?" new":"");e.innerHTML=`${letOf(i)}<small>${i+1}</small>`}
+      else{e.className="tile empty";e.textContent="?"}
+      t.appendChild(e);
+    }
+    $("words").innerHTML="";
+  }else{
+    t.innerHTML="";
+    const w=$("words");w.innerHTML="";let n=0;
+    CONFIG.segreto.toUpperCase().split(/\s+/).forEach(word=>{
+      const d=document.createElement("div");d.className="word";
+      [...word].forEach(ch=>{const e=document.createElement("div");e.className="tile";e.textContent=ch;e.style.animationDelay=(n++*0.12)+"s";d.appendChild(e)});
+      w.appendChild(d);
+    });
+  }
+  $("reveal").hidden=!(all&&!S.reveal);
+}
+$("reveal").onclick=()=>{S.reveal=true;save();renderSecret();toast("Il nostro messaggio ♥")};
+
+/* finestre */
+const ov=$("ov"),box=$("box");
+function openOv(html){box.innerHTML='<button class="x" aria-label="Chiudi">×</button>'+html;ov.classList.add("on");ov.scrollTop=0;box.querySelector(".x").onclick=closeOv}
+function closeOv(){ov.classList.remove("on")}
+ov.onclick=e=>{if(e.target===ov)closeOv()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeOv();$("lb").classList.remove("on")}});
+function zoom(u){if(!u)return;$("lb").querySelector("img").src=u;$("lb").classList.add("on")}
+$("lb").onclick=()=>$("lb").classList.remove("on");
+
+const norm=s=>s.trim().toUpperCase().replace(/\s+/g,"");
+function askCode(i){
+  openOv(`<h2>Giorno ${i+1}</h2><p class="serif" style="font-size:22px;font-style:italic;color:var(--soft)">Hai trovato la chiave per questo ricordo?</p>
+  <input id="code" placeholder="Codice a 4 cifre" inputmode="numeric" maxlength="4" autocomplete="off"><div class="err" id="err"></div>
+  <button class="btn" id="go">Apri ♥</button>`);
+  const inp=$("code");setTimeout(()=>inp.focus(),100);
+  const go=()=>{
+    if(norm(inp.value)===norm(GIORNI[i].codice)){
+      if(!isOpen(i)){S.open.push(i);save()}
+      renderGrid(i);renderSecret(i);toast("Nuova lettera raccolta: "+letOf(i)+" ♥");
+      showDay(i);
+    }else{
+      $("err").textContent=["Mmm, non è questa la chiave… riprova, bimba mia ♥","Quasi! Controlla bene il biglietto nella busta.","La busta custodisce bene il suo segreto… riprova ✨"][Math.floor(Math.random()*3)];
+      inp.classList.remove("shake");void inp.offsetWidth;inp.classList.add("shake");
+    }
+  };
+  $("go").onclick=go;inp.onkeydown=e=>{if(e.key==="Enter")go()};
+}
+function showDay(i){
+  const G=GIORNI[i];
+  openOv(`<div class="eyebrow">Giorno ${i+1}</div>
+  <h2>Il tuo piccolo regalo del giorno ${i+1} ♥</h2>
+  <div class="photo" id="ph" style="background-image:${bg(G.foto)}" role="img" aria-label="Fotografia del giorno"></div>
+  <h3 style="font-size:28px">${esc(G.titolo)}</h3>
+  <div class="paper">${esc(G.dedica)}</div>
+  <div class="env" id="env" role="button" tabindex="0" aria-label="Apri la busta"><div class="let">${letOf(i)}</div><div class="flap"></div><div class="body">♥</div></div>
+  <p class="keep">Conserva questa lettera. Alla fine del nostro viaggio scoprirai cosa nasconde.</p>
+  <button class="btn ghost" id="back">Torna al calendario</button>`);
+  $("ph").onclick=()=>zoom(G.foto);
+  const env=$("env");const op=()=>env.classList.add("o");env.onclick=op;env.onkeydown=e=>{if(e.key==="Enter"||e.key===" ")op()};
+  $("back").onclick=closeOv;
+}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* 25 dicembre */
+function xmasReady(){return new Date()>=new Date(CONFIG.natale)||location.hash==="#anteprima"}
+function renderXmas(){
+  const r=xmasReady();
+  $("xmas").innerHTML=r?`✨ 25 dicembre — la sorpresa finale ✨`:`🎁 25 dicembre<small>Si apre a Natale</small>`;
+  $("xmas").onclick=()=>{
+    if(!xmasReady()){toast("Ancora un po’ di pazienza ♥");return}
+    S.fin=true;save();const all=S.open.length===24;renderGrid();renderSecret(24);
+    openOv(`<div class="eyebrow">25 dicembre</div><h2>${esc(FINALE.titolo)}</h2>
+    <div class="photo" id="ph" style="background-image:${bg(FINALE.foto)}"></div>
+    <div class="paper">${esc(FINALE.lettera)}</div>
+    <div class="env" id="env" role="button" tabindex="0" aria-label="Apri la busta"><div class="let">${letOf(24)}</div><div class="flap"></div><div class="body">♥</div></div>
+    <p class="keep">L’ultima lettera del nostro viaggio ♥</p>
+    <p class="serif" style="font-size:22px;font-style:italic">${all?"Ecco il nostro messaggio:":"Raccogli tutte le lettere per scoprire il nostro messaggio."}</p>
+    ${all?`<div class="serif" style="font-size:30px;color:var(--red)">${esc(CONFIG.segreto)} ♥</div>`:""}
+    <button class="btn ghost" id="back">Torna al calendario</button>`);
+    $("ph").onclick=()=>zoom(FINALE.foto);$("back").onclick=closeOv;$("env").onclick=()=>$("env").classList.add("o");
+    if(!reduce)hearts();
+  };
+}
+function hearts(){const s=$("snow");for(let i=0;i<26;i++){const e=document.createElement("i");e.textContent="♥";e.style.left=Math.random()*100+"%";e.style.color="var(--red)";e.style.fontSize=12+Math.random()*16+"px";e.style.animationDuration=4+Math.random()*4+"s";s.appendChild(e);setTimeout(()=>e.remove(),9000)}}
+
+/* ricordi */
+$("polas").innerHTML=RICORDI.map((r,i)=>`<div class="pola"><div class="ph" data-i="${i}" style="background-image:${bg(r.foto)}"></div><b>${esc(r.titolo)}</b><span>${esc(r.data)}</span><p>${esc(r.testo)}</p></div>`).join("");
+document.querySelectorAll(".pola .ph").forEach(p=>p.onclick=()=>zoom(RICORDI[p.dataset.i].foto));
+
+/* esporta / importa */
+$("exp").onclick=()=>{
+  openOv(`<h2>I tuoi progressi</h2><p class="sub">I progressi restano su questo telefono e browser e <b>non</b> passano da soli a un altro dispositivo. Per spostarli, copia questo codice e incollalo nel nuovo dispositivo.</p>
+  <textarea id="ta" aria-label="Codice progressi"></textarea><button class="btn" id="imp">Importa questo codice</button>`);
+  $("ta").value=btoa(JSON.stringify(S));
+  $("imp").onclick=()=>{try{const v=JSON.parse(atob($("ta").value.trim()));if(!Array.isArray(v.open))throw 0;S={open:v.open.filter(n=>n>=0&&n<24),reveal:!!v.reveal,fin:!!v.fin};save();renderGrid();renderSecret();closeOv();toast("Progressi importati ♥")}catch(e){toast("Codice non valido")}};
+};
+
+renderGrid();renderSecret();renderXmas();
+</script>
+</body>
+</html>

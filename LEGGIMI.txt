@@ -1,0 +1,8 @@
+IL NOSTRO AVVENTO
+
+1. Apri index.html con un editor di testo (Blocco note va bene).
+2. In cima trovi il blocco "MODIFICA QUI": nome, frase, dediche, titoli, codici, lettera finale, ricordi.
+3. Le foto vanno nella cartella "foto" e si collegano con foto:"foto/1.jpg".
+4. Per pubblicare: trascina l'intera cartella su Netlify Drop (app.netlify.com/drop).
+5. Prova del 25 dicembre: aggiungi #anteprima alla fine dell'indirizzo.
+6. Prima di darlo a lei, cancella i dati di prova del sito dal browser (o prova in incognito).

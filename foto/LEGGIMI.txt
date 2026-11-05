@@ -1,0 +1,3 @@
+Metti qui le foto (es. 1.jpg, 2.jpg ... 24.jpg, finale.jpg, ricordo1.jpg).
+Poi in index.html scrivi, per esempio: foto:"foto/1.jpg"
+Consiglio: foto non troppo pesanti (sotto 500 KB ciascuna) per un caricamento veloce da telefono.
